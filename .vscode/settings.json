@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "/media/rob/ubuntu_data/github/1robroos/mypython"
+		}
+	],
+	"settings": {
+		"python.pythonPath": "/media/rob/ubuntu_data/github/1robroos/mypython/mypythonvenv/bin/python3"
+	}
+}

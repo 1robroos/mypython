@@ -1,0 +1,4 @@
+kl==4.0.2
+pylint
+flask
+textblob
