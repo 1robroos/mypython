@@ -1,4 +1,20 @@
-Creating virtual environments
+# How to setup vscode for your python application
+
+In your python script you might see some vscode comment that it is unable to import a library.
+
+```
+from kl import Kl, FileHandler, SpanishTransformer
+from textblob import TextBlob
+```
+
+There are two remedies for resolving these so called 'dependencies' :
+
+1 - Create a python virtual environment and install the missing libraries in it.
+2 - import the missing libraries directly in your machine without a virtual environment.
+
+
+## Creating a virtual environment
+
 Creation of virtual environments is done by executing the command venv:
 ```
 python3 -m venv /path/to/new/virtual/environment
@@ -6,7 +22,7 @@ python3 -m venv /path/to/new/virtual/environment
 
 What I do:
 
-I am in the relative folder named `mypython`
+I am in the relative folder named `mypython`  
 Then I type:
 ```
 python -m venv mypythonvenv
@@ -33,7 +49,9 @@ You can deactivate a virtual environment by typing “deactivate” in your shel
 I also have a `requirements.txt` file that holds:
 ```
 kl==4.0.2
-lint
+pylint
+flask
+textblob
 ```
 It contains a list of all my dependencies that my application needs to function properly.
 
@@ -53,38 +71,30 @@ Installing collected packages: kl
 Successfully installed kl-4.0.2
 ```
 
-## How to edit settings.json in Visual Studio Code?
-
-https://supunkavinda.blog/vscode-editing-settings-json
-
-Command pallette:
-`Preferences: open workspace settings ( JSON)`
-``
-	"settings": {
-		"python.pythonPath": "/media/rob/ubuntu_data/github/1robroos/mypython/mypythonvenv/bin/python3"
-	}
-```
-The workspace settings file resides here ( for me ):
-```
-/home/rob/.config/Code/Workspaces/1599287804896/workspace.json
-```
-
-I still have a problem with flask :
-```
-from flask import Flask
-```
-In my test script the vscode editor warns me "unable to import flask"
-
-SO I add flask into the requirements.txt and run this again:
-```
-pip install -r requirements.txt
-```
-flask will be installed in my virtual environment 
-I have to save my python script to get rid of the "unable to import flask".
+With the command `pip install -r requirements.txt` the libraries will be installed and your dependencies will be resolved.
+This way it is easy for other developers to 'adapt' your application to there own environment.
 
 
 
-install vscode extension tag:debuggers @sort:installs flask  : Python Essentials
+
+Now there is one more thing you need to do :
+
+Go to ‘Command Palette’ en type “ Python: Select Interpreter” and you will see a list of multiple installed python versions. Pick the one from your just created virtual environment.
+This will create a hidden direcory .vscode and in that directory it gives the file 'settings.json' and it looks like:
+
+```
+{
+    "python.pythonPath": "mypythonvenv/bin/python"
+}
+```
+
+This way the dependencies are resolved and you can run your app smoothly.
+
+
+# # Debugging in vscode
+
+
+Install the vscode extension `tag:debuggers @sort:installs flask  : Python Essentials`
 Now I can press F5 and select Flask and then I have to type my .py scriptname.
 The debugging starts and the terminal shows:
 ```
@@ -93,14 +103,14 @@ source /media/rob/ubuntu_data/github/1robroos/mypython/mypythonvenv/bin/activate
  * Environment: development
  * Debug mode: off
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-
-
 ```
 
+I can add a debug configuration names mypytest.py and it will create a configuration named `launch.json` in a .vscode directory.  
+Go to the debug extension and above at 'Run' you can add a configuration. Choose 'Flask' and give your app name again ( your python filename).
 
-I can add a debug configuration names mypytest.py and it will create a configuration named launch.json in a .vscode directory 
 
-It shows that my debug configuration is now saved:
+
+It shows that my debug configuration is now saved in .vscode/launch.json:
 ```
    "configurations": [
         {
