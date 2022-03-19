@@ -1,0 +1,5 @@
+{u'Account': '969526043371', u'UserId': 'AIDAJ2WX4545DX76RCC6S', 'ResponseMetadata': {'RetryAttempts': 0, 'HTTPStatusCode': 200, 'RequestId': 'decbc17b-faf4-4edb-8659-c3ac61dd324b', 'HTTPHeaders': {'x-amzn-requestid': 'decbc17b-faf4-4edb-8659-c3ac61dd324b', 'date': 'Sat,
+            26 Feb 2022 20: 51: 47 GMT', 'content-length': '407', 'content-type': 'text/xml'
+        }
+    }, u'Arn': 'arn:aws:iam: : 969526043371:user/kfsoladmin'
+}

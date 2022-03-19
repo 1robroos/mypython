@@ -1,0 +1,3 @@
+S_NO,Instance_ID,Instance_TYpe,Architecture,Launchteim,priv_ip,Volume
+1,i-059335ab0f5edc2c2,t2.micro,x86_64,2022-03-04,172.31.19.177,vol-027799c646b30338e
+2,i-019baeeba894e973e,t3a.micro,x86_64,2022-03-04,172.31.60.66,vol-09081c14f9b758685
