@@ -1,5 +1,6 @@
 #!/home/linuxbrew/.linuxbrew/bin/python3
 from logging import Filter
+from tracemalloc import Snapshot
 import boto3
 from pprint import pprint
 session=boto3.session.Session(profile_name="kfsoladmin")
@@ -36,9 +37,10 @@ for each_volid in list_volume_ids:
     #Taking snap of vol-09081c14f9b758685
     #Taking snap of vol-027799c646b30338e
     
-
+print("create snaps")
+snapids=[]
 for each_volid in list_volume_ids:
-    ec2_client.create_snapshot(
+    response=ec2_client.create_snapshot(
                 Description="Taking snapshot with Lambda and CloudWatch",
                 VolumeId=each_volid,
                 TagSpecifications=[
@@ -48,8 +50,28 @@ for each_volid in list_volume_ids:
                             {
                                 'Key':'Delete-on',
                                 'Value':'90'
+                            },
+                            {
+                                'Key':'Name',
+                                'Value':'GOIMIJMAARWEG'
                             }
                         ]
                     }
                 ]
     )
+    snapids.append((response.get('SnapshotId')))
+    print("the snap ids are:",snapids)
+    # print("show snap with response.get method")
+    # print(response.get('SnapshotId'))
+    # print("show snap with response[''] method")
+    # print(response['SnapshotId'])
+    
+# create a waiter.
+waiter = ec2_client.get_waiter('snapshot_completed')
+
+# apply the waiter:
+# filter, of onwerid of snapshot id gebruiken. Wij gebruiken nu de snapshotid's.
+
+waiter.wait(SnapshotIds=snapids)
+
+print("Snaps are created !")
